@@ -7,9 +7,7 @@ import {
     RouteConfigComponentProps
 } from 'react-router-config';
 
-import {
-    Header
-} from './components/index';
+import 'antd/dist/antd.css';
 
 const App = (props: RouteConfigComponentProps) => {
     const {
@@ -22,7 +20,6 @@ const App = (props: RouteConfigComponentProps) => {
 
     return (
         <Fragment>
-            <Header />
             {renderRoutes(routes)}
         </Fragment>
     )
