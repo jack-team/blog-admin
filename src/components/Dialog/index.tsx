@@ -1,119 +1,65 @@
-import React,{
-    PureComponent
-} from 'react';
-
 import {
-    createPortal
-} from 'react-dom';
+    render,
+    unmountComponentAtNode
+} from 'react-dom'
 
-export type Direction =
-    'top' |
-    'bottom' |
-    'left' |
-    'right' |
-    'center' |
-    'none';
+import React from 'react';
 
-interface Props {
-    show: boolean,
-    duration: number,
-    onClose: Function,
-    direction: Direction
+import Layer, {
+    Direction
+} from './layer';
+
+interface Opts {
+    clickClose?:boolean;
+    direction?:Direction
 }
 
-interface State {
-    show: boolean,
-    maskShow: boolean,
-    contentShow: boolean
-}
-
-import Container from './container';
-
-class Dialog extends PureComponent<Props, State> {
-    static defaultProps = {
-        show: false,
-        duration: 400,
-        direction: 'center',
-        onClose: () => null
+class Dialog {
+    constructor() {
+        const tag: string = `div`;
+        this.el = document.createElement(tag);
+        document.body.appendChild(this.el);
+        this.el.setAttribute(...[`role`, 'modal']);
     }
 
-    state: State = {
-        show: false,
-        maskShow: false,
-        contentShow: false
-    }
-
-    static getDerivedStateFromProps(
-        nextProps: Props,
-        prevState: State
-    ) {
-        const {
-            show: propShow
-        } = nextProps;
-
-
-        const {
-            show: stateShow
-        } = prevState;
-
-        if (stateShow === propShow) {
-            return null;
-        }
-
-        //显示
-        if (propShow) {
-            return {
-                show: true,
-                maskShow: true,
-                contentShow: true
-            }
-        }
-        //隐藏
-        else {
-            return {
-                maskShow: false,
-                contentShow: false
-            }
-        }
-    }
+    private dialog: any = null;
+    public el: HTMLElement | any = null;
 
     private onClosed = () => {
-        this.setState({
-            show: false
-        })
+        this.dialog = null;
+        unmountComponentAtNode(this.el);
+        document.body.removeChild(this.el);
     }
 
-    render() {
+    public show = (Content?: any, opts?:Opts) => {
         const {
-            show,
-            maskShow,
-            contentShow
-        } = this.state;
+            direction,
+            clickClose
+        } = opts || {};
 
-        const {
-            onClose,
-            children,
-            duration,
-            direction
-        } = this.props;
-
-        const content = (
-            <Container
-                duration={duration}
-                children={children}
-                maskShow={maskShow}
+        render((
+            <Layer
+                children={Content}
                 direction={direction}
-                onMaskClick={onClose}
-                contentShow={contentShow}
-                onContentClosed={this.onClosed}
+                clickClose={clickClose}
+                onClosed={this.onClosed}
+                ref={(e) => this.dialog = e}
             />
-        );
+        ), this.el);
 
-        return show ? createPortal(
-            content, document.body) : null;
+        if(module.hot) {
+            module.hot.accept();
+        }
+
+        return this;
     }
 
-
+    public close = () => {
+        if (this.dialog) {
+            this.dialog.close();
+        }
+        return this;
+    }
 }
 
 export default Dialog;

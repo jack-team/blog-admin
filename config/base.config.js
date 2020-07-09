@@ -17,6 +17,7 @@ const _entry_ = {
 }
 
 const _output_ = {
+    publicPath : `/`,
     path: resolve(`dist`),
     filename:   `js/[name]${chunkHash(__DEV__, `chunk`)}.js`
 }

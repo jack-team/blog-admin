@@ -1,0 +1,38 @@
+.user_login_page {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: #666;
+  justify-content: center;
+}
+
+.content {
+  width: 460px;
+  padding: 32px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.title {
+  color: #555;
+  font-size: 18px;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 32px;
+}
+
+.form_row {
+  padding-bottom: 12px;
+}
+
+.input_row {
+  height: 48px;
+  margin-bottom: 4px;
+  border-radius: 4px;
+}
+
+.login_submit {
+  width: 100%;
+  height: 50px;
+  border-radius: 8px;
+}

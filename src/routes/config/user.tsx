@@ -6,15 +6,13 @@ import {
     LazyLoad
 } from './../../components';
 
-import auth from './../auth';
-
 const routes: RouteConfig[] = [
     {
         exact: true,
         path: `/user/login`,
-        component: auth(LazyLoad(() => (
+        component: LazyLoad(() => (
             import('./../../pages/login')
-        )))
+        ))
     }
 ];
 

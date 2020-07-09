@@ -9,6 +9,7 @@ import chunkHash from './../utils/chunkHash';
 
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import ModuleConcatenationPlugin from 'webpack/lib/optimize/ModuleConcatenationPlugin';
 
 const plugins = [];
 
@@ -43,6 +44,11 @@ plugins.push(
     new MiniCssExtractPlugin({
         filename: `css/[name]${chunkHash(__dev__, `content`)}.css`
     })
+)
+
+// 开启 Scope Hoisting
+plugins.push(
+    new ModuleConcatenationPlugin()
 )
 
 export default plugins;

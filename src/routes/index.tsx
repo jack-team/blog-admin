@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {
-    HashRouter,
     BrowserRouter
 } from 'react-router-dom';
 
@@ -11,12 +10,8 @@ import {
 
 import configs from './config';
 
-const BaseRouter:any = (
-    __dev__ ? HashRouter : BrowserRouter
-)
-
 export default () => (
-    <BaseRouter>
+    <BrowserRouter>
         {renderRoutes(configs)}
-    </BaseRouter>
+    </BrowserRouter>
 )

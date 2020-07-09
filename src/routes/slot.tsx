@@ -7,8 +7,6 @@ import {
     RouteConfigComponentProps
 } from 'react-router-config';
 
-import 'antd/dist/antd.css';
-
 const App = (props: RouteConfigComponentProps) => {
     const {
         route

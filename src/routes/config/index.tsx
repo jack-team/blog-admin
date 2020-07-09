@@ -8,10 +8,13 @@ import {
     RouteConfig
 } from 'react-router-config';
 
-import App from './../../app';
+import Auth from './../auth';
+import Slot from './../slot';
 
 import userRoutes from './user';
 import homeRoutes from './home';
+
+import Layout from './../../pages/home/layout';
 
 const routes:RouteConfig[] = [
     {
@@ -21,13 +24,13 @@ const routes:RouteConfig[] = [
     },
     {
         path: `/home`,
-        component: App,
-        routes: homeRoutes
+        routes: homeRoutes,
+        component: Auth(Layout,true)
     },
     {
         path: `/user`,
-        component: App,
-        routes:userRoutes
+        routes:userRoutes,
+        component: Auth(Slot,false)
     }
 ];
 

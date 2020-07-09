@@ -18,26 +18,32 @@ const stats = {
 
 const serverConfig = {
     host: ip,
-    hot: true,
     open: true,
+    overlay:true,
+    hotOnly:true,
     inline: true,
     stats: stats,
-    compress: false,
+    compress: true,
     contentBase: `./`,
-    proxy:{
-        '/api':{
+    proxy: {
+        '/system':{
             target: 'http://localhost:6868',
-            pathRewrite: { '^/api': '/api' }
+            pathRewrite: { '^/system': '/system' }
         }
     },
     headers: {
         'Access-Control-Allow-Origin': '*',
-    }
+    },
+    historyApiFallback:true
 }
+
+webpackConfig.plugins.push(
+    new webpack.HotModuleReplacementPlugin()
+)
 
 const server = new devServer(
     webpack(webpackConfig), serverConfig
-)
+);
 
 server.listen(args.port, ip, () => (
     console.log(`Server listen to ${ip}:${args.port}`)

@@ -4,7 +4,7 @@ import React,{
 
 import {
     Direction
-} from './index';
+} from './layer';
 
 interface Props {
     show: boolean,

@@ -1,0 +1,22 @@
+.loading_container {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  border-radius: 4px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #333;
+}
+
+.loading_icon {
+  color: #fff;
+  font-size: 30px;
+  text-align: center;
+}
+
+.loading_msg {
+  color: #fff;
+  padding-top: 6px;
+  font-size: 12px;
+}
