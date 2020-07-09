@@ -12,9 +12,7 @@ import {
 
 import store, { persist } from './store';
 
-import './styles/theme.less';
-
-import 'antd/dist/antd.less';
+import 'antd/dist/antd.css';
 
 import './styles/common.scss';
 

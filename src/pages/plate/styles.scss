@@ -18,3 +18,17 @@
 .submit_button {
   float: right;
 }
+
+.table_view {
+  :global(.ant-table-thead th) {
+    width: 25%;
+    text-align: center;
+  }
+  :global(.ant-table-tbody td) {
+    text-align: center;
+  }
+}
+
+.action_tag {
+  cursor: pointer;
+}

@@ -28,6 +28,8 @@ import {
 
 import PlateAdd from './add';
 
+import styles from './styles.scss';
+
 import {
     InitState as PlateProps
 } from './../../store/reducer/plate/types';
@@ -93,9 +95,8 @@ class Plate extends PureComponent<Props, State> {
     private onSubmit = async (para: any) => {
         Loading.show();
         try {
-           await this.plateActions.
-           addPlate(para);
-           this.onCloseModal()
+           await this.plateActions.addPlate(para);
+           this.onCloseModal();
         }
         catch (e) {
             message.error(e.message);
@@ -129,7 +130,13 @@ class Plate extends PureComponent<Props, State> {
                     <Table
                         size="middle"
                         bordered={true}
-                        pagination={false}
+                        pagination={{
+                            total:100,
+                            pageSize:10,
+                            size:'default',
+                            showSizeChanger:false
+                        }}
+                        className={styles.table_view}
                         dataSource={this.dataSource}
                     >
                         <Column
@@ -143,28 +150,30 @@ class Plate extends PureComponent<Props, State> {
                             dataIndex="plateId"
                         />
                         <Column
-                            title="创建时间"
-                            key="createdAt"
-                            dataIndex="createdAt"
-                            render={(value: string) => {
-                                return moment(value).format(`YYYY-MM-DD HH:mm:ss`)
-                            }}
-                        />
-                        <Column
                             title="更新时间"
                             key="updatedAt"
                             dataIndex="updatedAt"
-                            render={(value: string) => {
-                                return moment(value).format(`YYYY-MM-DD HH:mm:ss`)
-                            }}
+                            render={(value: string) => (
+                                moment(value).format(
+                                    `YYYY-MM-DD HH:mm:ss`
+                                )
+                            )}
                         />
                         <Column
                             title="操作"
                             render={(value: string) => {
                                 return (
                                     <div>
-                                        <Tag color="#f50">删除</Tag>
-                                        <Tag color="#108ee9">编辑</Tag>
+                                        <Tag
+                                            color="#f50"
+                                            children="删除"
+                                            className={styles.action_tag}
+                                        />
+                                        <Tag
+                                            color="#108ee9"
+                                            children="编辑"
+                                            className={styles.action_tag}
+                                        />
                                     </div>
                                 )
                             }}
